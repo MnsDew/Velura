@@ -7,6 +7,7 @@ import { Award, Users, Globe, Heart } from 'lucide-react';
 import { useLanguage } from '@/providers/LanguageProvider';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 const About = () => {
   const { translations, isRTL } = useLanguage();
@@ -16,10 +17,10 @@ const About = () => {
   });
 
   const stats = [
-    { number: '50+', label: 'Years of Excellence', icon: Award },
-    { number: '500K+', label: 'Satisfied Guests', icon: Users },
-    { number: '25+', label: 'Countries Served', icon: Globe },
-    { number: '98%', label: 'Guest Satisfaction', icon: Heart },
+    { number: '50+', label: translations.aboutStatsYears, icon: Award },
+    { number: '500K+', label: translations.aboutStatsGuests, icon: Users },
+    { number: '25+', label: translations.aboutStatsCountries, icon: Globe },
+    { number: '98%', label: translations.aboutStatsSatisfaction, icon: Heart },
   ];
 
   const containerVariants = {
@@ -69,15 +70,10 @@ const About = () => {
 
               <motion.div variants={itemVariants} className="space-y-6">
                 <p className="text-orange-950 luxury-text leading-relaxed">
-                  For over five decades, our hotel has been synonymous with luxury, elegance, and exceptional service. 
-                  We have consistently redefined hospitality standards while maintaining our commitment to creating 
-                  unforgettable experiences for our guests.
+                  {translations.aboutLong1}
                 </p>
-                
                 <p className="text-orange-950 luxury-text leading-relaxed">
-                  Our heritage combines timeless traditions with modern innovations, ensuring that every guest 
-                  enjoys the perfect blend of comfort, luxury, and personalized service that has made us a 
-                  distinguished name in the hospitality industry.
+                  {translations.aboutLong2}
                 </p>
               </motion.div>
 
@@ -85,11 +81,11 @@ const About = () => {
                 {stats.map((stat, index) => (
                   <Card key={index} className="bg-[#644e3ea4] border-amber-200/20">
                     <CardContent className="p-6 text-center">
-                      <stat.icon className="w-8 h-8 text-amber-400 mx-auto mb-3" />
-                      <div className="text-3xl font-bold text-orange-50 luxury-heading mb-2">
+                      <stat.icon className="w-8 h-8 text-amber-50 mx-auto mb-3" />
+                      <div className="text-3xl font-bold text-orange-100 luxury-heading mb-2">
                         {stat.number}
                       </div>
-                      <div className="text-sm text-orange-950 luxury-text">
+                      <div className="text-sm text-orange-950 luxury-text font-bold bg-luxury-cream">
                         {stat.label}
                       </div>
                     </CardContent>
@@ -103,24 +99,30 @@ const About = () => {
               <div className="grid grid-cols-2 gap-4">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="relative overflow-hidden rounded-lg luxury-shadow"
+                  className="relative overflow-hidden rounded-lg luxury-shadow aspect-[4/3] md:aspect-video"
                 >
-                  <img
+                  <Image
                     src="https://images.pexels.com/photos/1001965/pexels-photo-1001965.jpeg"
                     alt="Hotel Lobby"
-                    className="w-full h-58 object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover rounded-lg"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 </motion.div>
                 
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="relative overflow-hidden rounded-lg luxury-shadow mt-8"
+                  className="relative overflow-hidden rounded-lg luxury-shadow mt-8 aspect-[4/3] md:aspect-video"
                 >
-                  <img
+                  <Image
                     src="https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg"
                     alt="Fine Dining"
-                    className="w-full h-48 object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover rounded-lg"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 </motion.div>
@@ -128,20 +130,23 @@ const About = () => {
 
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="relative overflow-hidden rounded-lg luxury-shadow"
+                className="relative overflow-hidden rounded-lg luxury-shadow aspect-[4/3] md:aspect-video"
               >
-                <img
+                <Image
                   src="https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg"
                   alt="Swimming Pool"
-                  className="w-full h-64 object-cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 100vw"
+                  className="object-cover rounded-lg"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-4 left-4 text-white">
                   <h3 className="text-xl font-bold luxury-heading mb-2">
-                    Award-Winning Facilities
+                    {translations.aboutAwardFacilitiesTitle}
                   </h3>
                   <p className="text-sm text-gray-200 luxury-text">
-                    Recognized globally for excellence in hospitality
+                    {translations.aboutAwardFacilitiesDesc}
                   </p>
                 </div>
               </motion.div>
@@ -154,26 +159,26 @@ const About = () => {
             className="mt-20 text-center"
           >
             <h3 className="text-3xl font-bold text-orange-950 mb-12 luxury-heading">
-              Recognition & Awards
+              {translations.aboutAwardSection}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {[
-                { title: "World's Best Hotel", year: "2024", org: "Travel Awards" },
-                { title: "Luxury Service Excellence", year: "2023", org: "Hospitality Excellence" },
-                { title: "Best Hotel Design", year: "2023", org: "Architecture Awards" },
-                { title: "Sustainable Tourism", year: "2024", org: "Green Awards" },
+                { title: translations.aboutAward1, year: translations.aboutAwardYear1, org: translations.aboutAwardOrg1 },
+                { title: translations.aboutAward2, year: translations.aboutAwardYear2, org: translations.aboutAwardOrg2 },
+                { title: translations.aboutAward3, year: translations.aboutAwardYear3, org: translations.aboutAwardOrg3 },
+                { title: translations.aboutAward4, year: translations.aboutAwardYear4, org: translations.aboutAwardOrg4 },
               ].map((award, index) => (
                 <motion.div
                   key={index}
                   whileHover={{ scale: 1.05 }}
                   className="bg-[#644e3ea4] p-6 rounded-lg border border-amber-200/20"
                 >
-                  <Award className="w-8 h-8 text-amber-400 mx-auto mb-4" />
-                  <h4 className="text-amber-50 font-bold luxury-heading mb-2">
+                  <Award className="w-8 h-8 text-amber-500 mx-auto mb-4" />
+                  <h4 className="text-orange-50 font-bold luxury-heading mb-2">
                     {award.title}
                   </h4>
                   <p className="text-amber-50 luxury-text mb-1 border-orange-950">{award.year}</p>
-                  <p className="text-orange-950 text-sm luxury-text">{award.org}</p>
+                  <p className="text-orange-950 text-sm luxury-text bg-luxury-cream">{award.org}</p>
                 </motion.div>
               ))}
             </div>

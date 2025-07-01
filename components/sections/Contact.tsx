@@ -90,19 +90,20 @@ const Contact = () => {
       icon: Phone,
       title: translations.phone,
       value: '+1 (555) 123-4567',
-      description: '24/7 Available',
+      description: translations.service247 || '24/7 Available',
     },
     {
       icon: Mail,
       title: translations.email,
       value: 'info@palacehotel.com',
-      description: 'Quick Response',
+      description: translations.quickResponse,
     },
     {
       icon: MapPin,
       title: translations.address,
       value: '123 Luxury Avenue, City Center',
-      description: 'Prime Location',
+      description: translations.primeLocation,
+      desc2: translations.primeLocationDescContact || translations.primeLocationDesc,
     },
   ];
 
@@ -140,7 +141,7 @@ const Contact = () => {
           <motion.div variants={itemVariants} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-800 dark:text-white mb-6 luxury-heading">
               <span className="bg-gradient-to-r from-[#4a2308] to-[#bd5f25da] bg-clip-text text-transparent">
-                {translations.contactTitle}
+                {translations.makeReservation}
               </span>
             </h2>
             <p className="text-xl text-orange-900 dark:text-orange-950 max-w-3xl mx-auto luxury-text">
@@ -163,7 +164,7 @@ const Contact = () => {
                 >
                   <Card className="bg-[#644e3ea4] border-[#864d25]/20 hover:border-[#864d25]/50 transition-all duration-300">
                     <CardContent className="p-6">
-                      <div className="flex items-start space-x-4">
+                      <div className={cn("flex items-start", isRTL ? "space-x-reverse space-x-6" : "space-x-6")}>
                         <div className="w-12 h-12 bg-[#864d25] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                           <info.icon className="w-6 h-6 text-stone-100" />
                         </div>
@@ -177,6 +178,11 @@ const Contact = () => {
                           <p className="text-sm text-white-600 dark:text-orange-50 luxury-text">
                             {info.description}
                           </p>
+                          {info.desc2 && (
+                            <p className="text-xs text-white-600 dark:text-orange-50 luxury-text mt-1">
+                              {info.desc2}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </CardContent>
@@ -190,17 +196,18 @@ const Contact = () => {
                 className="relative overflow-hidden rounded-lg luxury-shadow h-64"
               >
                 <img
-                  src="https://images.pexels.com/photos/161758/governor-s-mansion-montgomery-alabama-grand-staircase-161758.jpeg"
+                  // src="https://images.pexels.com/photos/161758/governor-s-mansion-montgomery-alabama-grand-staircase-161758.jpeg"
+                     src="https://images.pexels.com/photos/38271/ipad-map-tablet-internet-38271.jpeg"
                   alt="Hotel Location"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end">
                   <div className="p-6 text-white">
                     <h4 className="text-lg font-bold luxury-heading mb-2">
-                      Prime Location
+                      {translations.primeLocation}
                     </h4>
                     <p className="text-sm luxury-text">
-                      Located in the heart of the city with easy access to major attractions
+                      {translations.primeLocationDesc}
                     </p>
                   </div>
                 </div>
@@ -212,7 +219,7 @@ const Contact = () => {
               <Card className="bg-[#644e3ea4] border-[#864d25]/20 luxury-shadow">
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-bold text-slate-800 dark:text-orange-50 luxury-heading mb-6">
-                    Make a Reservation
+                    {translations.makeReservation}
                   </h3>
                   
                   {isSubmitted && (

@@ -93,7 +93,7 @@ const Hero = () => {
             transition={{ duration: 0.9 }}
             className="text-4xl md:text-7xl font-bold text-orange-50 mb-10 mt-20 md:mt-0 luxury-heading text-shadow leading-normal md:leading-tight"
           >
-            <span className="block bg-gradient-to-r from-[#fff7e1] to-[#864d25] bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-[#fff7e1] to-[#9b5d30] bg-clip-text text-transparent">
               {translations.welcome}
             </span>
           </motion.h1>
@@ -191,12 +191,12 @@ const Hero = () => {
         </motion.div>
 
         {/* On mobile, place the cursor between the card and the Explore Rooms button. On desktop, keep it at the bottom. */}
-        <div className="block md:hidden w-full flex justify-center mt-1/2">
+        <div className=" mb-5 block md:hidden w-full flex justify-center mt-5">
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             className="cursor-pointer"
-            onClick={() => scrollToSection('#Gallery')}
+            onClick={() => scrollToSection('#services')}
           >
             <ChevronDown className="w-8 h-8 text-orange-50/70 hover:text-[#864d25] transition-colors" />
           </motion.div>
@@ -211,7 +211,7 @@ const Hero = () => {
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             className="cursor-pointer"
-            onClick={() => scrollToSection('#rooms')}
+            onClick={() => scrollToSection('#services')}
           >
             <ChevronDown className="w-8 h-8 text-white/70 hover:text-[#864d25] transition-colors" />
           </motion.div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -18,48 +18,48 @@ const Gallery = () => {
   const galleryImages = [
     {
       src: 'https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg',
-      alt: 'Luxury Hotel Room',
-      category: 'Rooms',
+      alt: translations.galleryRooms,
+      category: translations.galleryRooms,
     },
     {
       src: 'https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg',
-      alt: 'Executive Suite',
-      category: 'Suites',
+      alt: translations.gallerySuites,
+      category: translations.gallerySuites,
     },
     {
       src: 'https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg',
-      alt: 'Fine Dining Restaurant',
-      category: 'Dining',
+      alt: translations.galleryDining,
+      category: translations.galleryDining,
     },
     {
       src: 'https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg',
-      alt: 'Swimming Pool',
-      category: 'Facilities',
+      alt: translations.galleryFacilities,
+      category: translations.galleryFacilities,
     },
     {
       src: 'https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg',
-      alt: 'Spa Treatment',
-      category: 'Spa',
+      alt: translations.gallerySpa,
+      category: translations.gallerySpa,
     },
     {
       src: 'https://images.pexels.com/photos/1001965/pexels-photo-1001965.jpeg',
-      alt: 'Hotel Lobby',
-      category: 'Lobby',
+      alt: translations.galleryLobby,
+      category: translations.galleryLobby,
     },
     {
       src: 'https://images.pexels.com/photos/2598638/pexels-photo-2598638.jpeg',
-      alt: 'Presidential Suite',
-      category: 'Suites',
+      alt: translations.gallerySuites,
+      category: translations.gallerySuites,
     },
     {
       src: 'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg',
-      alt: 'Fitness Center',
-      category: 'Fitness',
+      alt: translations.galleryFitness,
+      category: translations.galleryFitness,
     },
     {
       src: 'https://images.pexels.com/photos/7579831/pexels-photo-7579831.jpeg',
-      alt: 'Concierge Service',
-      category: 'Services',
+      alt: translations.galleryServices,
+      category: translations.galleryServices,
     },
   ];
 
@@ -97,6 +97,22 @@ const Gallery = () => {
     }
   };
 
+  // Keyboard navigation for modal
+  useEffect(() => {
+    if (selectedImage === null) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        prevImage();
+      } else if (e.key === 'ArrowRight') {
+        nextImage();
+      } else if (e.key === 'Escape') {
+        setSelectedImage(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage]);
+
   return (
     <section id="gallery" className="py-20 bg-[#fff7e1] dark:bg-[#e9dbc2]">
       <div className={cn("container mx-auto px-4", isRTL && "rtl")}>
@@ -119,7 +135,7 @@ const Gallery = () => {
             variants={itemVariants}
             className="text-xl text-slate-600 dark:text-orange-900 max-w-3xl mx-auto luxury-text"
           >
-            Discover the elegance and luxury that awaits you at our hotel
+            {translations.gallerySubtitle}
           </motion.p>
         </motion.div>
 
@@ -147,7 +163,7 @@ const Gallery = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="bg-amber-400 text-white px-3 py-1 rounded-full text-xs font-medium mb-2">
+                  <div className="bg-[#c8804cbd] text-white px-3 py-1 rounded-full text-xs font-medium mb-2">
                     {image.category}
                   </div>
                   <h3 className="text-lg font-bold luxury-heading">{image.alt}</h3>
@@ -174,10 +190,13 @@ const Gallery = () => {
                 className="relative max-w-4xl max-h-[90vh] w-full"
                 onClick={(e) => e.stopPropagation()}
               >
-                <img
+                <Image
                   src={galleryImages[selectedImage].src}
                   alt={galleryImages[selectedImage].alt}
-                  className="w-full h-full object-contain rounded-lg"
+                  fill
+                  sizes="90vw"
+                  className="object-contain rounded-lg"
+                  loading="lazy"
                 />
                 
                 {/* Close Button */}
@@ -205,7 +224,7 @@ const Gallery = () => {
 
                 {/* Image Info */}
                 <div className="absolute bottom-4 left-4 text-white">
-                  <div className="bg-amber-400 text-white px-3 py-1 rounded-full text-sm font-medium mb-2">
+                  <div className="bg-[#ca651cbd] text-white px-3 py-1 rounded-full text-sm font-medium mb-2">
                     {galleryImages[selectedImage].category}
                   </div>
                   <h3 className="text-xl font-bold luxury-heading">
@@ -215,7 +234,7 @@ const Gallery = () => {
 
                 {/* Image Counter */}
                 <div className="absolute bottom-4 right-4 text-white bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
-                  {selectedImage + 1} / {galleryImages.length}
+                  {selectedImage + 1} / {galleryImages.length} 
                 </div>
               </motion.div>
             </motion.div>

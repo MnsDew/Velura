@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Sparkles, Utensils, Dumbbell, Waves, ConciergeBell, Briefcase, Car, Wifi } from 'lucide-react';
@@ -14,49 +14,81 @@ const Services = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
 
   const services = [
     {
       icon: Sparkles,
       title: translations.spa,
-      description: 'Rejuvenate your body and soul with our world-class spa treatments and wellness programs.',
+      description: translations.spaDesc,
       image: 'https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg',
-      features: ['Massage Therapy', 'Aromatherapy', 'Facial Treatments', 'Sauna & Steam'],
+      features: [
+        translations.massageTherapy || 'Massage Therapy',
+        translations.aromatherapy || 'Aromatherapy',
+        translations.facialTreatments || 'Facial Treatments',
+        translations.saunaSteam || 'Sauna & Steam',
+      ],
     },
     {
       icon: Utensils,
       title: translations.restaurant,
-      description: 'Experience culinary excellence with our award-winning restaurants and diverse cuisine options.',
+      description: translations.restaurantDesc,
       image: 'https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg',
-      features: ['Fine Dining', 'Room Service', 'Bar & Lounge', 'Private Dining'],
+      features: [
+        translations.fineDining,
+        translations.roomService,
+        translations.barLounge,
+        translations.privateDining,
+      ],
     },
     {
       icon: Dumbbell,
       title: translations.fitness,
-      description: 'Stay fit and healthy with our state-of-the-art fitness center and personal training services.',
+      description: translations.fitnessDesc,
       image: 'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg',
-      features: ['Modern Equipment', 'Personal Trainers', 'Group Classes', '24/7 Access'],
+      features: [
+        translations.modernEquipment || 'Modern Equipment',
+        translations.personalTrainers || 'Personal Trainers',
+        translations.groupClasses || 'Group Classes',
+        translations.access247 || '24/7 Access',
+      ],
     },
     {
       icon: Waves,
       title: translations.pool,
-      description: 'Relax and unwind in our luxurious swimming pool with stunning city views.',
+      description: translations.poolDesc,
       image: 'https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg',
-      features: ['Infinity Pool', 'Pool Bar', 'Cabanas', 'Night Swimming'],
+      features: [
+        translations.infinityPool,
+        translations.poolBar,
+        translations.cabanas,
+        translations.nightSwimming,
+      ],
     },
     {
       icon: ConciergeBell,
       title: translations.concierge,
-      description: 'Our dedicated concierge team is available 24/7 to assist with all your needs.',
+      description: translations.conciergeDesc,
       image: 'https://images.pexels.com/photos/7579831/pexels-photo-7579831.jpeg',
-      features: ['24/7 Service', 'Tour Planning', 'Reservations', 'Transportation'],
+      features: [
+        translations.service247,
+        translations.tourPlanning,
+        translations.reservations,
+        translations.transportation,
+      ],
     },
     {
       icon: Briefcase,
       title: translations.business,
-      description: 'Conduct business seamlessly with our fully equipped business center and meeting rooms.',
+      description: translations.businessDesc,
       image: 'https://images.pexels.com/photos/416405/pexels-photo-416405.jpeg',
-      features: ['Meeting Rooms', 'Conference Facilities', 'High-Speed Internet', 'Secretarial Services'],
+      features: [
+        translations.meetingRooms,
+        translations.conferenceFacilities,
+        translations.highSpeedInternet,
+        translations.secretarialServices,
+      ],
     },
   ];
 
@@ -159,6 +191,7 @@ const Services = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       className="text-orange-200 hover:text-orange-50 font-medium transition-colors duration-300 luxury-text"
+                      onClick={() => { setModalContent(service.description); setModalOpen(true); }}
                     >
                       {translations.learnMore} →
                     </motion.button>
@@ -176,14 +209,14 @@ const Services = () => {
         >
           <div className="glass-effect rounded-2xl p-8 max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold text-orange-950 mb-6 luxury-heading">
-              Additional Premium Services
+              {translations.additionalPremium}
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                { icon: Car, name: 'Valet Parking' },
-                { icon: Wifi, name: 'High-Speed WiFi' },
-                { icon: ConciergeBell, name: 'Butler Service' },
-                { icon: Briefcase, name: 'Airport Transfer' },
+                { icon: Car, name: translations.valetParkingPremium },
+                { icon: Wifi, name: translations.highSpeedWifi },
+                { icon: ConciergeBell, name: translations.butlerService },
+                { icon: Briefcase, name: translations.airportTransfer },
               ].map((item, index) => (
                 <motion.div
                   key={index}
@@ -200,6 +233,23 @@ const Services = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Modal for Learn More */}
+      {modalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="bg-white rounded-lg p-8 max-w-md w-full shadow-lg relative">
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+              onClick={() => setModalOpen(false)}
+            >
+              ×
+            </button>
+            <div className="text-lg text-gray-900 luxury-text mb-4">
+              {modalContent}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

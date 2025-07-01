@@ -25,12 +25,12 @@ const Rooms = () => {
       size: '45',
       guests: 2,
       amenities: [
-        { icon: Bed, name: 'King Bed' },
-        { icon: Wifi, name: 'Free WiFi' },
-        { icon: Tv, name: 'Smart TV' },
-        { icon: Bath, name: 'Luxury Bath' },
+        { icon: Bed, name: translations.kingBed },
+        { icon: Wifi, name: translations.freeWifi },
+        { icon: Tv, name: translations.smartTv },
+        { icon: Bath, name: translations.luxuryBath },
       ],
-      description: 'Elegant and spacious deluxe room with modern amenities and stunning city views.',
+      description: translations.deluxeRoomDesc,
     },
     {
       id: 2,
@@ -40,12 +40,12 @@ const Rooms = () => {
       size: '75',
       guests: 3,
       amenities: [
-        { icon: Bed, name: 'King Bed' },
-        { icon: Coffee, name: 'Coffee Machine' },
-        { icon: Wind, name: 'Air Conditioning' },
-        { icon: Car, name: 'Valet Parking' },
+        { icon: Bed, name: translations.kingBed },
+        { icon: Coffee, name: translations.coffeeMachine },
+        { icon: Wind, name: translations.airConditioning },
+        { icon: Car, name: translations.valetParking },
       ],
-      description: 'Luxurious executive suite with separate living area and premium business amenities.',
+      description: translations.executiveSuiteDesc,
     },
     {
       id: 3,
@@ -55,12 +55,12 @@ const Rooms = () => {
       size: '120',
       guests: 4,
       amenities: [
-        { icon: Bed, name: 'Master Bedroom' },
-        { icon: Bath, name: 'Jacuzzi' },
-        { icon: Tv, name: 'Entertainment System' },
-        { icon: Coffee, name: 'Kitchenette' },
+        { icon: Bed, name: translations.masterBedroom },
+        { icon: Bath, name: translations.jacuzzi },
+        { icon: Tv, name: translations.entertainmentSystem },
+        { icon: Coffee, name: translations.kitchenette },
       ],
-      description: 'Our crown jewel - a presidential suite with panoramic views and exclusive amenities.',
+      description: translations.presidentialSuiteDesc,
     },
   ];
 

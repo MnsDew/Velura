@@ -94,7 +94,7 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <NavigationMenu className="hidden lg:flex">
-            <NavigationMenuList className="space-x-8">
+            <NavigationMenuList className="space-x-9">
               {navigation.map((item) => (
                 <NavigationMenuItem key={item.name}>
                   <NavigationMenuLink
@@ -114,16 +114,19 @@ const Header = () => {
           </NavigationMenu>
 
           {/* Language Switcher & CTA */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className={cn(
+            "hidden lg:flex items-center p-1",
+            isRTL ? "flex-row-reverse space-x-reverse gap-x-8" : "gap-x-5" //the space between the two buttons on top 
+          )}>
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-orange-50 hover:text-[#864d25] bg-transparent">
+                  <NavigationMenuTrigger className="text-orange-50 hover:text-[#864d25] bg-[#644e3ea4] hover:bg-[#644e3ea4] focus:bg-[#644e3ea4] transition-colors duration-300 rounded-md ">
                     <Globe className="w-4 h-4 mr-2" />
                     {languages.find(lang => lang.code === language)?.flag}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="p-4 w-48">
+                    <div className="p-4 w-48 bg-[#644e3ea4] rounded-md shadow-lg ">
                       {languages.map((lang) => (
                         <button
                           key={lang.code}
@@ -146,7 +149,10 @@ const Header = () => {
 
             <Button 
               onClick={() => scrollToSection('#contact')}
-              className="bg-[#864d25] text-[#fff7e1] px-6 py-2 rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
+              className={cn(
+                "bg-[#864d25] text-[#fff7e1] px-8 py-2 rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-xl",
+                isRTL ? "mr-6" : "ml-6"
+              )}
             >
               {translations.reservation}
             </Button>
@@ -170,7 +176,7 @@ const Header = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden glass-effect mt-4"
+            className="lg:hidden bg-[#644e3ea4] mt-4 rounded-md shadow-lg"
           >
             <div className="container mx-auto px-4 py-6">
               <div className="flex flex-col space-y-4">
@@ -192,8 +198,8 @@ const Header = () => {
                         onClick={() => setLanguage(lang.code as 'ar' | 'en' | 'tr')}
                         className={cn(
                           'text-left p-2 rounded-md transition-colors',
-                          'hover:bg-black/10',
-                          language === lang.code ? 'text-[#864d25]' : 'text-black'
+                          'hover:bg-[#fff7e1] hover:text-[#864d25]',
+                          language === lang.code ? 'bg-[#fff7e1] text-[#864d25]' : 'text-orange-50'
                         )}
                       >
                         <span className="mr-2">{lang.flag}</span>

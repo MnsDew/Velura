@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { Instagram, Twitter, Facebook, Youtube, Phone, Mail, MapPin } from 'lucide-react';
 import { useLanguage } from '@/providers/LanguageProvider';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
+import logo from '../images/icon.png';
 
 const Footer = () => {
   const { translations, isRTL } = useLanguage();
@@ -44,17 +46,22 @@ const Footer = () => {
             className="space-y-4"
           >
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center">
-                <span className="text-black font-bold text-xl luxury-heading">P</span>
+              <div className="w-12 h-12 bg-gradient-to-br from-amber-800 to-amber-600 rounded-full flex items-center justify-center">
+                <Image
+                  src={logo}
+                  alt="Logo"
+                  width={100}
+                  height={100}
+                  className="object-cover rounded-full"
+                />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-orange-950 luxury-heading">Velura Hotel</h3>
-                <p className="text-amber-400 text-sm luxury-text">Luxury Experience</p>
+                  <p className="text-orange-300 text-sm luxury-text">Luxury Experience</p>
               </div>
             </div>
             <p className="text-orange-950 luxury-text leading-relaxed">
-              Experience unparalleled luxury and exceptional service at our world-class hotel. 
-              Creating memorable moments for over 50 years.
+              {translations.footerText}
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => (
@@ -65,7 +72,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.2, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
-                  className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:text-amber-400 hover:bg-white/20 transition-all duration-300"
+                  className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-yellow-800 hover:text-amber-600 hover:bg-white/20 transition-all duration-300"
                 >
                   <social.icon size={18} />
                 </motion.a>
@@ -135,15 +142,15 @@ const Footer = () => {
             </h4>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-amber-400" />
+                <Phone className="w-5 h-5 text-amber-800" />
                 <span className="text-orange-950 luxury-text">+1 (555) 123-4567</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-amber-400" />
-                <span className="text-orange-950 luxury-text">info@palacehotel.com</span>
+                <Mail className="w-5 h-5 text-amber-800" />
+                <span className="text-orange-950 luxury-text">info@Velura-hotel.com</span>
               </div>
               <div className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-amber-400 mt-1" />
+                <MapPin className="w-5 h-5 text-amber-800 mt-1" />
                 <span className="text-orange-950 luxury-text">
                   123 Luxury Avenue<br />
                   City Center, State 12345
@@ -162,17 +169,17 @@ const Footer = () => {
         >
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-orange-950 text-sm luxury-text">
-              © 2024 Palace Hotel. All rights reserved.
+              {translations.copyright}
             </p>
             <div className="flex space-x-6">
-              <a href="#" className="text-orange-950 hover:text-amber-400 text-sm luxury-text transition-colors">
-                Privacy Policy
+              <a href="#" className="text-orange-950 hover:text-amber-500 text-sm luxury-text transition-colors">
+                {translations.privacyPolicy}
               </a>
-              <a href="#" className="text-orange-950 hover:text-amber-400 text-sm luxury-text transition-colors">
-                Terms of Service
+              <a href="#" className="text-orange-950 hover:text-amber-500 text-sm luxury-text transition-colors">
+                {translations.termsOfService}
               </a>
-              <a href="#" className="text-orange-950 hover:text-amber-400 text-sm luxury-text transition-colors">
-                Cookie Policy
+              <a href="#" className="text-orange-950 hover:text-amber-500 text-sm luxury-text transition-colors">
+                {translations.cookiePolicy}
               </a>
             </div>
           </div>
