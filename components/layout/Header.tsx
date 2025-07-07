@@ -51,8 +51,10 @@ const Header = () => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => setIsMobileMenuOpen(false), 400);
+    } else {
+      setIsMobileMenuOpen(false);
     }
-    setIsMobileMenuOpen(false);
   };
 
   return (

@@ -6,10 +6,13 @@ import { ChevronDown, Calendar, Users } from 'lucide-react';
 import { useLanguage } from '@/providers/LanguageProvider';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { DatePicker } from '@/components/ui/DatePicker';
 
 const Hero = () => {
   const { translations, isRTL } = useLanguage();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [checkIn, setCheckIn] = useState<Date | undefined>(undefined);
+  const [checkOut, setCheckOut] = useState<Date | undefined>(undefined);
 
   const heroImages = [
     'https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg',
@@ -122,9 +125,11 @@ const Hero = () => {
                 </label>
                 <div className="relative">
                   <Calendar className="absolute left-3 top-3 w-5 h-5 text-[#864d25]" />
-                  <input
-                    type="date"
-                    className="w-full pl-10 pr-4 py-3 bg-[#fff7e1] border border-[#864d25]/30 rounded-lg text-[#864d25] placeholder-gray-500 focus:border-[#864d25] focus:outline-none focus:ring-2 focus:ring-[#864d25]/50 hover:bg-[#f3e3c3] transition-colors"
+                  <DatePicker
+                    value={checkIn}
+                    onChange={setCheckIn}
+                    placeholder={translations.checkIn}
+                    {...(checkOut ? { maxDate: checkOut } : {})}
                   />
                 </div>
               </div>
@@ -134,10 +139,12 @@ const Hero = () => {
                   {translations.checkOut}
                 </label>
                 <div className="relative">
-                  <Calendar className="absolute left-3 top-3 w-5 h-5 text-[#864d25]" />
-                  <input
-                    type="date"
-                    className="w-full pl-10 pr-4 py-3 bg-[#fff7e1] border border-[#864d25]/30 rounded-lg text-[#864d25] placeholder-gray-500 focus:border-[#864d25] focus:outline-none focus:ring-2 focus:ring-[#864d25]/50 hover:bg-[#f3e3c3] transition-colors"
+                  <DatePicker
+                    value={checkOut}
+                    onChange={setCheckOut}
+                    placeholder={translations.checkOut}
+                    {...(checkIn ? { minDate: checkIn } : {})}
+                    {...(checkIn && checkOut ? { rangeHighlight: { start: checkIn, end: checkOut } } : {})}
                   />
                 </div>
               </div>

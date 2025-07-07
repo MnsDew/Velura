@@ -156,7 +156,13 @@ const translations = {
     primeLocation: 'موقع مميز',
     primeLocationDesc: 'يقع في موقع استراتيجي وسط المدينة، بالقرب من أبرز المعالم السياحية والمرافق الحيوية',
     copyright: '© 2025 م.منصور الجبلي | Mansoor Gabali | MnsDew. جميع الحقوق محفوظة',
+
+    //service desc the balls desc
+    modernEquipment :"من اجود انواع الأثاث",
+    personalTrainers:"مدرب شخصي",
     meetingRooms: "غرف الاجتماعات",
+    groupClasses:"حصص تدريبية",
+    access247:"في الخدمة 24/7",
     conferenceFacilities: "مرافق المؤتمرات",
     highSpeedInternet: "إنترنت عالي السرعة",
     secretarialServices: "خدمات السكرتارية",
@@ -169,6 +175,10 @@ const translations = {
     cabanas: "أكواخ",
     nightSwimming: "السباحة الليلية",
     quickResponse: "استجابة سريعة",
+    massageTherapy:" علاج طبيعي بالتدليك " ,
+    aromatherapy:"علاج بالعطور",
+    facialTreatments:"علاجات الوجه وتنظيف للبشرة",
+    saunaSteam:"بخار الساونا",
     primeLocationDescContact: " يقع في وسط المدينة بالقرب من جميع المعالم الرئيسية.",
   },
   

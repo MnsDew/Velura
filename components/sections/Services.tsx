@@ -176,11 +176,11 @@ const Services = () => {
                   <p className="text-orange-50-300 mb-4 luxury-text leading-relaxed">
                     {service.description}
                   </p>
-
-                  <div className="space-y-2">
+ 
+                  <div className="space-y-5 mr-1"> 
                     {service.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-orange-300 rounded-full" />
+                        <div className="w-2 h-2 bg-orange-300 rounded-full ml-3" />
                         <span className="text-sm text-orange-50 luxury-text">{feature}</span>
                       </div>
                     ))}
@@ -190,10 +190,10 @@ const Services = () => {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="text-orange-200 hover:text-orange-50 font-medium transition-colors duration-300 luxury-text"
-                      onClick={() => { setModalContent(service.description); setModalOpen(true); }}
+                      // className="text-orange-200 hover:text-orange-50 font-medium transition-colors duration-300 luxury-text"
+                      // onClick={() => { setModalContent(service.description); setModalOpen(true); }}
                     >
-                      {translations.learnMore} →
+                      {/* {translations.learnMore} → */}
                     </motion.button>
                   </div>
                 </CardContent>
@@ -235,7 +235,7 @@ const Services = () => {
       </div>
 
       {/* Modal for Learn More */}
-      {modalOpen && (
+      {/* {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
           <div className="bg-white rounded-lg p-8 max-w-md w-full shadow-lg relative">
             <button
@@ -249,7 +249,7 @@ const Services = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </section>
   );
 };

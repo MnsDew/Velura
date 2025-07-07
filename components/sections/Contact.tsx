@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Phone, Mail, MapPin, Send, Calendar, Users, CheckCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, Users, CheckCircle } from 'lucide-react';
 import { useLanguage } from '@/providers/LanguageProvider';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import emailjs from '@emailjs/browser';
+import { DatePicker } from '@/components/ui/DatePicker';
 
 const Contact = () => {
   const { translations, isRTL } = useLanguage();
@@ -31,10 +32,18 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [checkIn, setCheckIn] = useState<Date | undefined>(undefined);
+  const [checkOut, setCheckOut] = useState<Date | undefined>(undefined);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    
+    const updatedFormData = {
+      ...formData,
+      checkIn: checkIn ? checkIn.toISOString().split('T')[0] : '',
+      checkOut: checkOut ? checkOut.toISOString().split('T')[0] : '',
+    };
     
     try {
       // EmailJS configuration - Replace with your actual service details
@@ -42,11 +51,11 @@ const Contact = () => {
         from_name: formData.name,
         from_email: formData.email,
         phone: formData.phone,
-        check_in: formData.checkIn,
-        check_out: formData.checkOut,
+        check_in: updatedFormData.checkIn,
+        check_out: updatedFormData.checkOut,
         guests: formData.guests,
         message: formData.message,
-        to_name: 'Palace Hotel',
+        to_name: 'Velura Hotel',
       };
 
       // Replace these with your actual EmailJS credentials
@@ -308,13 +317,7 @@ const Contact = () => {
                           {translations.checkIn}
                         </label>
                         <div className="relative">
-                          <Input
-                            name="checkIn"
-                            type="date"
-                            value={formData.checkIn}
-                            onChange={handleInputChange}
-                            className="bg-[#fff7e1]/50 dark:bg-[#e9dbc2] border-[#864d25]/30 focus:border-[#864d25] pl-4 placeholder-white text-[#864d25] focus:placeholder-[#864d25]"
-                          />
+                          <DatePicker value={checkIn} onChange={setCheckIn} placeholder={translations.checkIn} />
                         </div>
                       </div>
                       
@@ -323,13 +326,7 @@ const Contact = () => {
                           {translations.checkOut}
                         </label>
                         <div className="relative">
-                          <Input
-                            name="checkOut"
-                            type="date"
-                            value={formData.checkOut}
-                            onChange={handleInputChange}
-                            className="bg-[#fff7e1]/50 dark:bg-[#e9dbc2] border-[#864d25]/30 focus:border-[#864d25] pl-4 placeholder-white text-[#864d25] focus:placeholder-[#864d25]"
-                          />
+                          <DatePicker value={checkOut} onChange={setCheckOut} placeholder={translations.checkOut} />
                         </div>
                       </div>
                     </div>
