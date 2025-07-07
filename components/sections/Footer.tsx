@@ -45,7 +45,7 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
             className="space-y-4"
           >
-            <div className="flex items-center space-x-3">
+            <div className={cn("flex items-center space-x-3", isRTL && "space-x-reverse")}>
               <div className="w-12 h-12 bg-gradient-to-br from-amber-800 to-amber-600 rounded-full flex items-center justify-center">
                 <Image
                   src={logo}
@@ -171,7 +171,7 @@ const Footer = () => {
             <p className="text-orange-950 text-sm luxury-text">
               {translations.copyright}
             </p>
-            <div className="flex space-x-6">
+            <div className={cn("flex space-x-6", isRTL && "space-x-reverse")}>
               <a href="#" className="text-orange-950 hover:text-amber-500 text-sm luxury-text transition-colors">
                 {translations.privacyPolicy}
               </a>
